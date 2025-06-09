@@ -18,7 +18,17 @@ npm run build
 
 ## Usage
 
-Add to your MCP client configuration:
+Right now, Claude Desktop does not support video input. I'd recommend using a different client like [Goose](https://block.github.io/goose/) and adding it as an extension.
+
+In Goose, you can use the Gif Creator tool by going to Advanced Settings > Extension > + Add Custom Extension > and in the command pasting:
+```
+node /path/to/gif-creator-mcp/dist/index.js
+```
+
+I'd also increase the time out to 1000.
+
+
+For other MCP clients, you can use the following command to start the server:
 
 ```json
 {
@@ -30,6 +40,8 @@ Add to your MCP client configuration:
   }
 }
 ```
+
+
 
 ## Tools
 
