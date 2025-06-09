@@ -1,6 +1,8 @@
 # GIF Creator MCP
 
 An MCP (Model Context Protocol) server that converts video files to GIF animations.
+![gif-creator-demo](https://github.com/user-attachments/assets/0543d53f-8bc7-4a16-8a4b-e41ef13568c6)
+
 
 ## Features
 
@@ -40,8 +42,6 @@ For other MCP clients, you can use the following command to start the server:
   }
 }
 ```
-
-
 
 ## Tools
 
