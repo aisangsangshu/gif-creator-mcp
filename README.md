@@ -1,3 +1,5 @@
+[English](README.md) | [中文](README-zh.md)
+
 # GIF Creator MCP
 
 An MCP (Model Context Protocol) server that converts video files to GIF animations.
