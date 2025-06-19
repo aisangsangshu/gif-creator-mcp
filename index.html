@@ -5,6 +5,18 @@
 </head>
 <body>
   <h2>视频转GIF</h2>
+
+  <!-- 新增：下载视频功能 -->
+  <div style="border:1px solid #ccc;padding:10px;margin-bottom:10px;">
+    <h3>1. 下载视频</h3>
+    <input id="videoUrl" type="text" placeholder="输入视频链接" style="width:300px;">
+    <button id="selectSave">选择保存位置</button>
+    <span id="savePath"></span><br>
+    <button id="download">下载视频</button>
+    <div id="downloadResult"></div>
+  </div>
+
+  <!-- 原有GIF功能 -->
   <button id="selectVideo">选择视频</button>
   <span id="videoPath"></span><br>
   FPS: <input id="fps" type="number" value="15"><br>
@@ -17,6 +29,36 @@
   <script>
     const { ipcRenderer } = require('electron');
     let videoPath = '';
+    let savePath = '';
+
+    // 新增：选择保存位置
+    document.getElementById('selectSave').onclick = async () => {
+      savePath = await ipcRenderer.invoke('select-save-path');
+      document.getElementById('savePath').innerText = savePath || '';
+    };
+
+    // 新增：下载视频
+    document.getElementById('download').onclick = async () => {
+      const url = document.getElementById('videoUrl').value.trim();
+      if (!url) {
+        alert('请输入视频链接');
+        return;
+      }
+      if (!savePath) {
+        alert('请选择保存位置');
+        return;
+      }
+      document.getElementById('downloadResult').innerText = '下载中...';
+      try {
+        const res = await ipcRenderer.invoke('download-video', { url, savePath });
+        document.getElementById('downloadResult').innerText = '下载完成: ' + res;
+        // 自动填充到选择视频框
+        videoPath = res;
+        document.getElementById('videoPath').innerText = videoPath;
+      } catch (e) {
+        document.getElementById('downloadResult').innerText = '下载失败: ' + e.message;
+      }
+    };
 
     document.getElementById('selectVideo').onclick = async () => {
       videoPath = await ipcRenderer.invoke('select-video');

@@ -140,6 +140,10 @@ npm install --save-dev electron-packager
 ```
 npx electron-packager . gif-creator --platform=win32 --arch=x64 --out=release --overwrite
 ```
+## 新增yt-dlp下载视频
+
+* `致谢项目`([yt-dlp](<https://github.com/yt-dlp/yt-dlp>))
+
 ## 注意事项
 
 - 输出的 GIF 保存在输入视频的同一目录下
