@@ -126,7 +126,20 @@ test();
 
 - Node.js
 - FFmpeg（通过 @ffmpeg-installer/ffmpeg 自动安装）
+## 升级安装在windows平台
+- 安装electron后启动main.cjs的命令是
+```
+npm start
+```
+- 安装打包工具electron-packager
+```
+npm install --save-dev electron-packager
 
+```
+- 打包为windows应用直接执行
+```
+npx electron-packager . gif-creator --platform=win32 --arch=x64 --out=release --overwrite
+```
 ## 注意事项
 
 - 输出的 GIF 保存在输入视频的同一目录下
