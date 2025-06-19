@@ -2,7 +2,7 @@
   "name": "gif-creator-mcp",
   "version": "1.0.0",
   "description": "MCP server for converting video files to GIFs",
-  "main": "main.js",
+  "main": "main.cjs",
   "type": "module",
   "scripts": {
     "build": "tsc",
