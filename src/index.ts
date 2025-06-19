@@ -107,7 +107,7 @@ class GifCreatorServer {
     });
   }
 
-  private async convertVideoToGif(params: ConvertVideoToGifParams) {
+  public async convertVideoToGif(params: ConvertVideoToGifParams) {
     const {
       video_path,
       fps = 10,
@@ -299,3 +299,7 @@ server.start().catch((error) => {
   console.error("Failed to start server:", error);
   process.exit(1);
 });
+  // 在 src/index.ts 末尾加
+export async function convertVideoToGif(params: ConvertVideoToGifParams) {
+return await new GifCreatorServer().convertVideoToGif(params);
+}

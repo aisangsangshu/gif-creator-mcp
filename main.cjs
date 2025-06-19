@@ -1,6 +1,6 @@
 const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
-const server = require('./dist/index.js');
+const { convertVideoToGif } = require('./dist/index.js');
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -18,7 +18,7 @@ function createWindow () {
 app.whenReady().then(createWindow);
 
 ipcMain.handle('convert-video-to-gif', async (event, args) => {
-  return await server.convertVideoToGif(args);
+  return await convertVideoToGif(args);
 });
 
 ipcMain.handle('select-video', async () => {
