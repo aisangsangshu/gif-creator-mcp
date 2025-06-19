@@ -2,12 +2,12 @@
   "name": "gif-creator-mcp",
   "version": "1.0.0",
   "description": "MCP server for converting video files to GIFs",
-  "main": "dist/index.js",
+  "main": "main.js",
   "type": "module",
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "start": "node dist/index.js"
+    "start": "electron ."
   },
   "keywords": [
     "mcp",
@@ -27,6 +27,7 @@
   "devDependencies": {
     "@types/fluent-ffmpeg": "^2.1.27",
     "@types/node": "^22.10.2",
+    "electron": "^36.5.0",
     "typescript": "^5.7.2"
   }
 }

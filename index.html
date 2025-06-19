@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>视频转GIF工具</title>
+</head>
+<body>
+  <h2>视频转GIF</h2>
+  <button id="selectVideo">选择视频</button>
+  <span id="videoPath"></span><br>
+  FPS: <input id="fps" type="number" value="15"><br>
+  宽度: <input id="width" type="number" value="480"><br>
+  开始时间(s): <input id="startTime" type="number" value="0"><br>
+  时长(s): <input id="duration" type="number" value="10"><br>
+  分段时长(s): <input id="splitDuration" type="number" value="2"><br>
+  <button id="convert">开始转换</button>
+  <div id="result"></div>
+  <script>
+    const { ipcRenderer } = require('electron');
+    let videoPath = '';
+
+    document.getElementById('selectVideo').onclick = async () => {
+      videoPath = await ipcRenderer.invoke('select-video');
+      document.getElementById('videoPath').innerText = videoPath || '';
+    };
+
+    document.getElementById('convert').onclick = async () => {
+      if (!videoPath) {
+        alert('请先选择视频');
+        return;
+      }
+      const args = {
+        video_path: videoPath,
+        fps: Number(document.getElementById('fps').value),
+        width: Number(document.getElementById('width').value),
+        start_time: Number(document.getElementById('startTime').value),
+        duration: Number(document.getElementById('duration').value),
+        split_duration: Number(document.getElementById('splitDuration').value)
+      };
+      document.getElementById('result').innerText = '处理中...';
+      try {
+        const res = await ipcRenderer.invoke('convert-video-to-gif', args);
+        document.getElementById('result').innerText = '转换完成: ' + JSON.stringify(res);
+      } catch (e) {
+        document.getElementById('result').innerText = '出错: ' + e.message;
+      }
+    };
+  </script>
+</body>
+</html> 
